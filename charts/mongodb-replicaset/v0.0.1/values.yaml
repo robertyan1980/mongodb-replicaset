@@ -21,14 +21,14 @@ auth:
 
 # Specs for the Docker image for the init container that establishes the replica set
 installImage:
-  repository: k8s.gcr.io/mongodb-install
+  repository: mirrorgooglecontainers/mongodb-install
   tag: 0.6
   pullPolicy: IfNotPresent
 
 # Specs for the MongoDB image
 image:
   repository: mongo
-  tag: 3.6
+  tag: 4.0
   pullPolicy: IfNotPresent
 
 # Additional environment variables to be set in the container
@@ -91,6 +91,8 @@ tls:
 
 # Entries for the MongoDB config file
 configmap:
+    net:
+       maxIncomingConnections: 10000
 
 ## Period to wait for broker graceful shutdown (sigterm) before pod is killed (sigkill)
 ## ref: https://kubernetes-v1-4.github.io/docs/user-guide/production-pods/#lifecycle-hooks-and-termination-notice
