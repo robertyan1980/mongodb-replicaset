@@ -11,7 +11,7 @@ questions:
   group: "Container Images"
   subquestions:
   - variable: installImage.repository
-    default: "k8s.gcr.io/mongodb-install"
+    default: "mirrorgooglecontainers/mongodb-install"
     description: "Image name for the install container"
     type: string
     label: Init-Container Image Name
@@ -26,7 +26,7 @@ questions:
     type: string
     label: MongoDB Image Name
   - variable: image.tag
-    default: "3.6"
+    default: "4.0"
     description: "MongoDB image tag"
     type: string
     label: Image Tag
