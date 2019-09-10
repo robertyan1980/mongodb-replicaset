@@ -5,5 +5,5 @@ metadata:
   name: my-project
 data:
   projectName: mongo-home
-  orgId: 5d7330bd9ccf64237cde0820
-  baseUrl: http://cloud.mongodb.com
+  orgId: 5d749a905538558756fad676
+  baseUrl: https://cloud.mongodb.com

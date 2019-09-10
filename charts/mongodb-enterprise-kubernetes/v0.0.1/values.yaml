@@ -27,7 +27,7 @@ opsManager:
 registry:
   # Specify if images are pulled from private repository
   imagePullSecrets:
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   #repository: quay.io/mongodb
   repository: quay-mirror.qiniu.com/mongodb
 
