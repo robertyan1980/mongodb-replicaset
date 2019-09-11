@@ -16,4 +16,4 @@ spec:
   project: my-project
   credentials: my-credentials
 
-  persistent: true
+  persistent: false
