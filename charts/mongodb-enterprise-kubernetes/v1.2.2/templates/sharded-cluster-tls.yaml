@@ -28,9 +28,4 @@ spec:
   #
   security:
     tls:
-      enabled: true
-      
-  additionalMongodConfig: # Optional
-    net:
-      ssl:
-        mode: preferSSL   
+      enabled: true  
