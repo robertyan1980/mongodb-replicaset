@@ -17,15 +17,3 @@ spec:
   credentials: my-credentials
 
   persistent: true
-
-  # This will create a TLS enabled Sharded Cluster, which means that
-  # all the traffic between Shards and clients will be encrypted using
-  # TLS certificates.  These certificates will be generated on the fly
-  # by the operator using the Kubernetes CA.  Please refer to
-  # Kubernetes TLS Documentation on how to approve these certs:
-  #
-  # https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
-  #
-  security:
-    tls:
-      enabled: true  
