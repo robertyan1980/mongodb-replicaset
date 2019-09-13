@@ -18,23 +18,21 @@ spec:
 
   persistent: true
   configSrvPodSpec:
-  cpu: '0.25'
-    # note: it's important to always specify memory otherwise wired tiger cache will be calculated incorrectly and
-    # monitoring tools will report the size of Kubernetes node instead of the real size of the container
+    cpu: '0.2'
     memory: 512M
     persistence:
       single:
         storage: 1G
 
   mongosPodSpec:
-    cpu: '0.25'
+    cpu: '0.2'
     memory: 512M
     persistence:
       single:
         storage: 1G
 
   shardPodSpec:
-    cpu: '0.25'
+    cpu: '0.2'
     memory: 512M
     persistence:
       multiple:
