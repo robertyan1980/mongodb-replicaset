@@ -45,7 +45,7 @@ spec:
           storageClass: standard
 
 
-security:
+  security:
     clusterAuthenticationMode: x509
     tls:
       enabled: true
