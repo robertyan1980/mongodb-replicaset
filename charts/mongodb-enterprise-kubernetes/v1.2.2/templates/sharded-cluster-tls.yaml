@@ -46,6 +46,10 @@ spec:
 
 
   security:
-    clusterAuthenticationMode: x509
     tls:
       enabled: true
+
+  additionalMongodConfig:
+    net:
+      ssl:
+        mode: "preferSSL"

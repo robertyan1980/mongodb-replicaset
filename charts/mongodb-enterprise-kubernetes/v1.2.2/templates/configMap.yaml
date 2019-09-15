@@ -8,5 +8,5 @@ data:
   orgId: 5d749a905538558756fad676
   baseUrl: https://cloud.mongodb.com
 
-  authenticationMode: x509
-  credentials: my-credentials
+  #authenticationMode: x509
+  #credentials: my-credentials
