@@ -33,6 +33,48 @@ spec:
       {{- end }}    
 {{- end }}
 
+{{- if .Values.ReplicaSet }}
+spec:
+  type: ReplicaSet
+
+  version: {{ .Values.ReplicaSet.version }}
+
+  project: {{ template "mongodb-database.project" . }}
+  credentials: {{ template "mongodb-database.credentials" . }}
+
+  podSpec:
+    cpu: "{{ .Values.ReplicaSet.podSpec.cpu }}"
+    memory: {{ .Values.ReplicaSet.podSpec.memory }}
+    persistence:
+      {{- if .Values.ReplicaSet.podSpec.persistence.single }}
+      single:
+        storage: {{ .Values.ReplicaSet.podSpec.persistence.single.storage }}
+        storageClass: {{ .Values.ReplicaSet.podSpec.persistence.single.storageClass }}
+      {{- end }}    
+      {{- if .Values.ReplicaSet.podSpec.persistence.multiple }}
+      multiple:
+        data:
+          storage: {{ .Values.ReplicaSet.podSpec.persistence.multiple.data.storage }}
+          storageClass: {{ .Values.ReplicaSet.podSpec.persistence.multiple.data.storageClass }}
+        logs:
+          storage: {{ .Values.ReplicaSet.podSpec.persistence.multiple.logs.storage }}
+          storageClass: {{ .Values.ReplicaSet.podSpec.persistence.multiple.logs.storageClass }}
+      {{- end }}  
+
+  {{- if .Values.ReplicaSet.security }}
+  security:
+    tls:
+      enabled: {{ .Values.ReplicaSet.security.tls.enabled }}
+  {{- end }}  
+
+  {{- if .Values.ReplicaSet.additionalMongodConfig }}
+  additionalMongodConfig:
+    net:
+      ssl:
+        mode: "{{ .Values.ReplicaSet.additionalMongodConfig.net.ssl.mode }}"
+  {{- end }}    
+{{- end }}
+
 {{- if .Values.ShardedCluster }}
 spec:
   type: ShardedCluster
