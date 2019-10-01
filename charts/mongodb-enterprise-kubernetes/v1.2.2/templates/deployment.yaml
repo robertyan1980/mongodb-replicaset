@@ -8,6 +8,11 @@ metadata:
 spec:
   type: Standalone
 
+  version: {{ .Values.ShardedCluster.version }}
+
+  project: {{ template "mongodb-database.project" . }}
+  credentials: {{ template "mongodb-database.credentials" . }}
+
   podSpec:
     cpu: "{{ .Values.Standalone.podSpec.cpu }}"
     memory: {{ .Values.Standalone.podSpec.memory }}
