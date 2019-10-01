@@ -30,7 +30,6 @@ metadata:
 #           storage: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storage }}
 #           storageClass: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storageClass }}
 #       {{- end }}    
-# {{- end }}
 
 spec:
   type: ReplicaSet
