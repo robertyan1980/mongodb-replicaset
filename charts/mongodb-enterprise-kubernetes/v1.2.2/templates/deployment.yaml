@@ -4,7 +4,7 @@ kind: MongoDB
 metadata:
   name: {{ template "mongodb-database.fullname" . }}
 
-{{- if .Values.Standalone }}
+{{- if .Values.Standalone -}}
 spec:
   type: Standalone
 
@@ -31,9 +31,9 @@ spec:
           storage: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storage }}
           storageClass: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storageClass }}
       {{- end }}    
-{{- end }}
+{{- end -}}
 
-{{- if .Values.ReplicaSet }}
+{{- if .Values.ReplicaSet -}}
 spec:
   type: ReplicaSet
 
@@ -73,9 +73,9 @@ spec:
       ssl:
         mode: "{{ .Values.ReplicaSet.additionalMongodConfig.net.ssl.mode }}"
   {{- end }}    
-{{- end }}
+{{- end -}}
 
-{{- if .Values.ShardedCluster }}
+{{- if .Values.ShardedCluster -}}
 spec:
   type: ShardedCluster
 
@@ -144,4 +144,4 @@ spec:
       ssl:
         mode: "{{ .Values.ShardedCluster.additionalMongodConfig.net.ssl.mode }}"
   {{- end }}  
-{{- end }}
+{{- end -}}
