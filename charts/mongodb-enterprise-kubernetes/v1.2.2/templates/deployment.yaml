@@ -8,7 +8,7 @@ metadata:
 spec:
   type: Standalone
 
-  version: {{ .Values.ShardedCluster.version }}
+  version: {{ .Values.Standalone.version }}
 
   project: {{ template "mongodb-database.project" . }}
   credentials: {{ template "mongodb-database.credentials" . }}
