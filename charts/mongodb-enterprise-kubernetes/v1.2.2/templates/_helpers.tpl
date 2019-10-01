@@ -32,20 +32,6 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
-Create the name for the custom resource mongodb.
-*/}}
-{{- define "mongodb-database.crds" -}}
-{{- template "mongodb-database.fullname" . -}}-crds
-{{- end -}}
-
-{{/*
-Create the name for the custom resource opsmanagers.
-*/}}
-{{- define "mongodb-database.opsmanagers" -}}
-{{- template "mongodb-database.fullname" . -}}-ops
-{{- end -}}
-
-{{/*
 Create the name for the ConfigMap of mms project.
 */}}
 {{- define "mongodb-database.project" -}}
