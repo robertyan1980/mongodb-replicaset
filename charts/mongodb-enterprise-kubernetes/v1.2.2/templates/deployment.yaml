@@ -1,0 +1,139 @@
+---
+apiVersion: mongodb.com/v1
+kind: MongoDB
+metadata:
+  name: {{ template "mongodb-database.fullname" . }}
+
+spec:
+  type: {{ .Values.type }}
+
+  project: {{ template "mongodb-database.project" . }}
+  credentials: {{ template "mongodb-database.credentials" . }}
+
+{{- if .Values.Standalone }}
+  version: {{ .Values.Standalone.version }}
+
+  persistent: {{ .Values.Standalone.persistent }}
+  podSpec:
+    cpu: "{{ .Values.Standalone.podSpec.cpu }}"
+    memory: {{ .Values.Standalone.podSpec.memory }}
+    persistence:
+      {{- if .Values.Standalone.podSpec.persistence.single }}
+      single:
+        storage: {{ .Values.Standalone.podSpec.persistence.single.storage }}
+        storageClass: {{ .Values.Standalone.podSpec.persistence.single.storageClass }}
+      {{- end }}    
+      {{- if .Values.Standalone.podSpec.persistence.multiple }}
+      multiple:
+        data:
+          storage: {{ .Values.Standalone.podSpec.persistence.multiple.data.storage }}
+          storageClass: {{ .Values.Standalone.podSpec.persistence.multiple.data.storageClass }}
+        logs:
+          storage: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storage }}
+          storageClass: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storageClass }}
+      {{- end }} 
+{{- end }}       
+
+{{- if .Values.ReplicaSet }}
+  version: {{ .Values.ReplicaSet.version }}
+
+  members: {{ .Values.ReplicaSet.members }}
+
+  persistent: {{ .Values.ReplicaSet.persistent }}
+  podSpec:
+    cpu: "{{ .Values.ReplicaSet.podSpec.cpu }}"
+    memory: {{ .Values.ReplicaSet.podSpec.memory }}
+    persistence:
+      {{- if .Values.ReplicaSet.podSpec.persistence.single }}
+      single:
+        storage: {{ .Values.ReplicaSet.podSpec.persistence.single.storage }}
+        storageClass: {{ .Values.ReplicaSet.podSpec.persistence.single.storageClass }}
+      {{- end }}    
+      {{- if .Values.ReplicaSet.podSpec.persistence.multiple }}
+      multiple:
+        data:
+          storage: {{ .Values.ReplicaSet.podSpec.persistence.multiple.data.storage }}
+          storageClass: {{ .Values.ReplicaSet.podSpec.persistence.multiple.data.storageClass }}
+        logs:
+          storage: {{ .Values.ReplicaSet.podSpec.persistence.multiple.logs.storage }}
+          storageClass: {{ .Values.ReplicaSet.podSpec.persistence.multiple.logs.storageClass }}
+      {{- end }}  
+
+  {{- if .Values.ReplicaSet.security }}
+  security:
+    tls:
+      enabled: {{ .Values.ReplicaSet.security.tls.enabled }}
+  {{- end }}  
+
+  {{- if .Values.ReplicaSet.additionalMongodConfig }}
+  additionalMongodConfig:
+    net:
+      ssl:
+        mode: "{{ .Values.ReplicaSet.additionalMongodConfig.net.ssl.mode }}"
+  {{- end }}
+{{- end }}
+
+{{- if .Values.ShardedCluster }}
+  shardCount: {{ .Values.ShardedCluster.shardCount }}
+  mongodsPerShardCount: {{ .Values.ShardedCluster.mongodsPerShardCount }}
+  mongosCount: {{ .Values.ShardedCluster.mongosCount }}
+  configServerCount: {{ .Values.ShardedCluster.configServerCount }}
+
+  version: {{ .Values.ShardedCluster.version }}
+
+  persistent: {{ .Values.ShardedCluster.persistent }}
+  configSrvPodSpec:
+    cpu: "{{ .Values.ShardedCluster.configSrvPodSpec.cpu }}"
+    memory: {{ .Values.ShardedCluster.configSrvPodSpec.memory }}
+    persistence:
+      {{- if .Values.ShardedCluster.configSrvPodSpec.persistence.single }}
+      single:
+        storage: {{ .Values.ShardedCluster.configSrvPodSpec.persistence.single.storage }}
+        storageClass: {{ .Values.ShardedCluster.configSrvPodSpec.persistence.single.storageClass }}
+      {{- end }}    
+      {{- if .Values.ShardedCluster.configSrvPodSpec.persistence.multiple }}
+      multiple:
+        data:
+          storage: {{ .Values.ShardedCluster.configSrvPodSpec.persistence.multiple.data.storage }}
+          storageClass: {{ .Values.ShardedCluster.configSrvPodSpec.persistence.multiple.data.storageClass }}
+        logs:
+          storage: {{ .Values.ShardedCluster.configSrvPodSpec.persistence.multiple.logs.storage }}
+          storageClass: {{ .Values.ShardedCluster.configSrvPodSpec.persistence.multiple.logs.storageClass }}
+      {{- end }}    
+        
+  mongosPodSpec:
+    cpu: "{{ .Values.ShardedCluster.mongosPodSpec.cpu }}"
+    memory: {{ .Values.ShardedCluster.mongosPodSpec.memory }}
+
+  shardPodSpec:
+    cpu: "{{ .Values.ShardedCluster.shardPodSpec.cpu }}"
+    memory: {{ .Values.ShardedCluster.shardPodSpec.memory }}
+    persistence:
+      {{- if .Values.ShardedCluster.shardPodSpec.persistence.single }}
+      single:
+        storage: {{ .Values.ShardedCluster.shardPodSpec.persistence.single.storage }}
+        storageClass: {{ .Values.ShardedCluster.shardPodSpec.persistence.single.storageClass }}
+      {{- end }}    
+      {{- if .Values.ShardedCluster.shardPodSpec.persistence.multiple }}
+      multiple:
+        data:
+          storage: {{ .Values.ShardedCluster.shardPodSpec.persistence.multiple.data.storage }}
+          storageClass: {{ .Values.ShardedCluster.shardPodSpec.persistence.multiple.data.storageClass }}
+        logs:
+          storage: {{ .Values.ShardedCluster.shardPodSpec.persistence.multiple.logs.storage }}
+          storageClass: {{ .Values.ShardedCluster.shardPodSpec.persistence.multiple.logs.storageClass }}
+      {{- end }}    
+
+  {{- if .Values.ShardedCluster.security }}
+  security:
+    tls:
+      enabled: {{ .Values.ShardedCluster.security.tls.enabled }}
+  {{- end }}  
+
+  {{- if .Values.ShardedCluster.additionalMongodConfig }}
+  additionalMongodConfig:
+    net:
+      ssl:
+        mode: "{{ .Values.ShardedCluster.additionalMongodConfig.net.ssl.mode }}"
+  {{- end }}
+{{- end }}
