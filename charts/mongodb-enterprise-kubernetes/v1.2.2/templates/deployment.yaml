@@ -12,6 +12,8 @@ spec:
   project: {{ template "mongodb-database.project" . }}
   credentials: {{ template "mongodb-database.credentials" . }}
 
+  persistent: {{ .Values.ReplicaSet.persistent }}
+
   podSpec:
     cpu: "{{ .Values.ReplicaSet.podSpec.cpu }}"
     memory: {{ .Values.ReplicaSet.podSpec.memory }}
