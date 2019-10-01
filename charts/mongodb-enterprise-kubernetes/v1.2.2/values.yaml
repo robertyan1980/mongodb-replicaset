@@ -43,7 +43,11 @@ mms:
   user: MYWNRACR
   publicApiKey: 9329fe7b-b778-4106-a99e-f41f90e30553
 
-Standalone:
+# type: Standalone
+type: ReplicaSet
+# type: ShardedCluster
+
+# Standalone:
 #   version: 4.2.0
 
 #   persistent: true
@@ -93,7 +97,7 @@ ReplicaSet:
         mode: "preferSSL"
 
 
-ShardedCluster:
+# ShardedCluster:
 #   shardCount: 2
 #   mongodsPerShardCount: 3
 #   mongosCount: 1

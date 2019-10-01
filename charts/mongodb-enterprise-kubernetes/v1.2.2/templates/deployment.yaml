@@ -4,14 +4,13 @@ kind: MongoDB
 metadata:
   name: {{ template "mongodb-database.fullname" . }}
 
-{{- if .Values.Standalone -}}
 spec:
-  type: Standalone
-
-  version: {{ .Values.Standalone.version }}
-
+  type: {{ .Values.type }}
   project: {{ template "mongodb-database.project" . }}
   credentials: {{ template "mongodb-database.credentials" . }}
+
+{{- if .Values.Standalone }}
+  version: {{ .Values.Standalone.version }}
 
   podSpec:
     cpu: "{{ .Values.Standalone.podSpec.cpu }}"
@@ -31,16 +30,10 @@ spec:
           storage: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storage }}
           storageClass: {{ .Values.Standalone.podSpec.persistence.multiple.logs.storageClass }}
       {{- end }}    
-{{- end -}}
+{{- end }}
 
-{{- if .Values.ReplicaSet -}}
-spec:
-  type: ReplicaSet
-
+{{- if .Values.ReplicaSet }}
   version: {{ .Values.ReplicaSet.version }}
-
-  project: {{ template "mongodb-database.project" . }}
-  credentials: {{ template "mongodb-database.credentials" . }}
 
   podSpec:
     cpu: "{{ .Values.ReplicaSet.podSpec.cpu }}"
@@ -73,21 +66,15 @@ spec:
       ssl:
         mode: "{{ .Values.ReplicaSet.additionalMongodConfig.net.ssl.mode }}"
   {{- end }}    
-{{- end -}}
+{{- end }}
 
-{{- if .Values.ShardedCluster -}}
-spec:
-  type: ShardedCluster
-
+{{- if .Values.ShardedCluster }}
   shardCount: {{ .Values.ShardedCluster.shardCount }}
   mongodsPerShardCount: {{ .Values.ShardedCluster.mongodsPerShardCount }}
   mongosCount: {{ .Values.ShardedCluster.mongosCount }}
   configServerCount: {{ .Values.ShardedCluster.configServerCount }}
 
   version: {{ .Values.ShardedCluster.version }}
-
-  project: {{ template "mongodb-database.project" . }}
-  credentials: {{ template "mongodb-database.credentials" . }}
 
   persistent: {{ .Values.ShardedCluster.persistent }}
   configSrvPodSpec:
@@ -144,4 +131,4 @@ spec:
       ssl:
         mode: "{{ .Values.ShardedCluster.additionalMongodConfig.net.ssl.mode }}"
   {{- end }}  
-{{- end -}}
+{{- end }}
