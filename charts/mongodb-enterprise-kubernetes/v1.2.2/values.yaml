@@ -34,3 +34,75 @@ registry:
 # Set this to true if the operator will require Kubernetes CA
 # infrastructure to generate TLS certificates.
 needsCAInfrastructure: true
+
+mms:
+  projectName: standalone
+  orgId: 5d86c36c82c6a72ac22bd1d1
+  baseUrl: http://192.168.1.9:8080
+  #private key of mms project
+  user: MYWNRACR
+  publicApiKey: 9329fe7b-b778-4106-a99e-f41f90e30553
+
+Standalone:
+  version: 4.2.0
+
+  persistent: true
+
+  podSpec:
+    cpu: '0.2'
+    memory: 512M
+    persistence:
+      multiple:
+        # if the child of "multiple" is omitted then the default size will be used.
+        # 16G for "data", 1G for "journal", 3Gb for "logs"
+        data:
+          storage: 1G
+          storageClass: standard
+        logs:
+          storage: 500M
+          storageClass: standard
+
+ShardedCluster:
+  shardCount: 2
+  mongodsPerShardCount: 3
+  mongosCount: 1
+  configServerCount: 3
+
+  version: 4.2.0
+
+  persistent: true
+
+  configSrvPodSpec:
+    cpu: '0.2'
+    memory: 512M
+    persistence:
+      single:
+        storage: 1G
+        storageClass: standard
+
+  mongosPodSpec:
+    cpu: '0.2'
+    memory: 512M
+
+  shardPodSpec:
+    cpu: '0.2'
+    memory: 512M
+    persistence:
+      multiple:
+        # if the child of "multiple" is omitted then the default size will be used.
+        # 16G for "data", 1G for "journal", 3Gb for "logs"
+        data:
+          storage: 1G
+          storageClass: standard
+        logs:
+          storage: 500M
+          storageClass: standard
+
+  security:
+    tls:
+      enabled: true
+
+  additionalMongodConfig:
+    net:
+      ssl:
+        mode: "preferSSL"
