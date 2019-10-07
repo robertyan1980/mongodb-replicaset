@@ -10,7 +10,7 @@ data:
 
   {{- if .Values.mms.clusterAuthenticationMode }}
   # Enable x509 authentication at the Project level.
-  authenticationMode: {{ .Values.mms.authenticationMode }}
+  authenticationMode: {{ .Values.mms.clusterAuthenticationMode }}
 
   # If enabling x509 authentication, the `credentials` attribute need to be supplied as well.
   # This is the same one used when creating a `MongoDB` resource.
