@@ -1,0 +1,11 @@
+{
+  "names": [
+    {"O": "organization"},
+    {"OU": "organizationalunit"}
+  ],
+  "CN": "my-x509-authenticated-user",
+  "key": {
+    "algo": "rsa",
+    "size": 4096
+  }
+}

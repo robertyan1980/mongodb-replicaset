@@ -7,3 +7,12 @@ data:
   projectName: {{ .Values.mms.projectName }}
   orgId: {{ .Values.mms.orgId }}
   baseUrl: {{ .Values.mms.baseUrl }}
+
+  {{- if .Values.mms.clusterAuthenticationMode }}
+  # Enable x509 authentication at the Project level.
+  authenticationMode: {{ .Values.mms.authenticationMode }}
+
+  # If enabling x509 authentication, the `credentials` attribute need to be supplied as well.
+  # This is the same one used when creating a `MongoDB` resource.
+  credentials: {{ template "mongodb-database.credentials" . }}
+  {{- end }}
