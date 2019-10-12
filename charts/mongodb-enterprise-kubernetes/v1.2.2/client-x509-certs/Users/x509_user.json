@@ -1,0 +1,11 @@
+{
+  "names": [
+    {"O": "organization"},
+    {"OU": "organizationalunit"}
+  ],
+  "CN": "clusteradmin",
+  "key": {
+    "algo": "rsa",
+    "size": 4096
+  }
+}

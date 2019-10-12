@@ -1,0 +1,12 @@
+---
+apiVersion: mongodb.com/v1
+kind: MongoDBUser
+metadata:
+  name: clusteradmin
+spec:
+  username: "CN=clusteradmin,OU=organizationalunit,O=organization"
+  db: "$external"
+  project: mongodb-enterprise-operator-project
+  roles:
+    - db: "admin"
+      name: "clusterAdmin"
