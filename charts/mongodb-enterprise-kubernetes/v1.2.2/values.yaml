@@ -1,3 +1,5 @@
+fullnameOverride: replicaSet-home
+
 # Create the CustomerResourceDefinition for MongoDB custom types.
 createCrds: true
 
@@ -45,6 +47,8 @@ mms:
   #for configmap enabling x509
   clusterAuthenticationMode: x509
 
+service: replicaSet-home-svc
+
 # type: Standalone
 type: ReplicaSet
 # type: ShardedCluster
@@ -53,6 +57,7 @@ type: ReplicaSet
 #   version: 4.2.0
 
 #   persistent: true
+#   exposedExternally: true
 
 #   podSpec:
 #     cpu: '0.2'
@@ -109,6 +114,7 @@ ReplicaSet:
 #   version: 4.2.0
 
 #   persistent: true
+#   exposedExternally: true
 
 #   configSrvPodSpec:
 #     cpu: '0.2'

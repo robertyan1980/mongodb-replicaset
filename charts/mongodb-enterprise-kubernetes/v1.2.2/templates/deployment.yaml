@@ -10,10 +10,15 @@ spec:
   project: {{ template "mongodb-database.project" . }}
   credentials: {{ template "mongodb-database.credentials" . }}
 
+  service: {{ .Values.service }}
+
 {{- if .Values.Standalone }}
   version: {{ .Values.Standalone.version }}
 
   persistent: {{ .Values.Standalone.persistent }}
+
+  exposedExternally: {{ .Values.Standalone.exposedExternally }}
+
   podSpec:
     cpu: "{{ .Values.Standalone.podSpec.cpu }}"
     memory: {{ .Values.Standalone.podSpec.memory }}
@@ -85,6 +90,8 @@ spec:
   version: {{ .Values.ShardedCluster.version }}
 
   persistent: {{ .Values.ShardedCluster.persistent }}
+  exposedExternally: {{ .Values.ShardedCluster.exposedExternally }}
+
   configSrvPodSpec:
     cpu: "{{ .Values.ShardedCluster.configSrvPodSpec.cpu }}"
     memory: {{ .Values.ShardedCluster.configSrvPodSpec.memory }}
