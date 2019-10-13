@@ -38,7 +38,7 @@ registry:
 needsCAInfrastructure: true
 
 mms:
-  projectName: replicaSet
+  projectName: shardedCluster
   orgId: 5d86c36c82c6a72ac22bd1d1
   baseUrl: http://192.168.1.9:8080
   #private key of mms project
