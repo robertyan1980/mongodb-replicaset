@@ -1,4 +1,4 @@
-fullnameOverride: ShardedCluster-home
+fullnameOverride: shardedCluster-home
 
 # Create the CustomerResourceDefinition for MongoDB custom types.
 createCrds: true
@@ -47,7 +47,7 @@ mms:
   #for configmap enabling x509
   clusterAuthenticationMode: x509
 
-service: ShardedCluster-home-svc
+service: shardedcluster-home-svc
 
 # type: Standalone
 # type: ReplicaSet
