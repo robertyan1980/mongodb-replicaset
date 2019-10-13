@@ -1,4 +1,4 @@
-fullnameOverride: shardedCluster-home
+fullnameOverride: shardedcluster-home
 
 # Create the CustomerResourceDefinition for MongoDB custom types.
 createCrds: true
