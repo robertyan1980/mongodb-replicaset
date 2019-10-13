@@ -1,4 +1,4 @@
-fullnameOverride: replicaSet-home
+fullnameOverride: ShardedCluster-home
 
 # Create the CustomerResourceDefinition for MongoDB custom types.
 createCrds: true
@@ -47,11 +47,11 @@ mms:
   #for configmap enabling x509
   clusterAuthenticationMode: x509
 
-service: replicaSet-home-svc
+service: ShardedCluster-home-svc
 
 # type: Standalone
-type: ReplicaSet
-# type: ShardedCluster
+# type: ReplicaSet
+type: ShardedCluster
 
 # Standalone:
 #   version: 4.2.0
@@ -73,62 +73,14 @@ type: ReplicaSet
 #           storage: 500M
 #           storageClass: standard
 
-ReplicaSet:
-  version: 4.2.0
-
-  members: 3
-
-  persistent: true
-
-  podSpec:
-    cpu: '0.2'
-    memory: 512M
-    persistence:
-      multiple:
-        # if the child of "multiple" is omitted then the default size will be used.
-        # 16G for "data", 1G for "journal", 3Gb for "logs"
-        data:
-          storage: 1G
-          storageClass: standard
-        logs:
-          storage: 500M
-          storageClass: standard
-
-  security:
-    clusterAuthenticationMode: x509
-    tls:
-      enabled: true
-
-  additionalMongodConfig:
-    net:
-      ssl:
-        mode: "preferSSL"
-
-
-# ShardedCluster:
-#   shardCount: 2
-#   mongodsPerShardCount: 3
-#   mongosCount: 1
-#   configServerCount: 3
-
+# ReplicaSet:
 #   version: 4.2.0
 
+#   members: 3
+
 #   persistent: true
-#   exposedExternally: true
 
-#   configSrvPodSpec:
-#     cpu: '0.2'
-#     memory: 512M
-#     persistence:
-#       single:
-#         storage: 1G
-#         storageClass: standard
-
-#   mongosPodSpec:
-#     cpu: '0.2'
-#     memory: 512M
-
-#   shardPodSpec:
+#   podSpec:
 #     cpu: '0.2'
 #     memory: 512M
 #     persistence:
@@ -151,3 +103,51 @@ ReplicaSet:
 #     net:
 #       ssl:
 #         mode: "preferSSL"
+
+
+ShardedCluster:
+  shardCount: 1
+  mongodsPerShardCount: 3
+  mongosCount: 1
+  configServerCount: 1
+
+  version: 4.2.0
+
+  persistent: true
+  exposedExternally: true
+
+  configSrvPodSpec:
+    cpu: '0.2'
+    memory: 512M
+    persistence:
+      single:
+        storage: 1G
+        storageClass: standard
+
+  mongosPodSpec:
+    cpu: '0.2'
+    memory: 512M
+
+  shardPodSpec:
+    cpu: '0.2'
+    memory: 512M
+    persistence:
+      multiple:
+        # if the child of "multiple" is omitted then the default size will be used.
+        # 16G for "data", 1G for "journal", 3Gb for "logs"
+        data:
+          storage: 1G
+          storageClass: standard
+        logs:
+          storage: 500M
+          storageClass: standard
+
+  security:
+    clusterAuthenticationMode: x509
+    tls:
+      enabled: true
+
+  additionalMongodConfig:
+    net:
+      ssl:
+        mode: "preferSSL"
