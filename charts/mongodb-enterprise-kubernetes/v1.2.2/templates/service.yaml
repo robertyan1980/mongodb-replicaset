@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Values.service }}-external
+  labels:
+    app: {{ .Values.service }}
+spec:
+  type: NodePort
+  ports:
+    - port: 27017
+      nodePort: 30017
+  selector:
+    app: {{ .Values.service }}

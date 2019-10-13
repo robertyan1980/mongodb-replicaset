@@ -1,5 +1,8 @@
 mongo --host mongodb-enterprise-operator-2 --port 27018 --tls --tlsCAFile ca.crt --tlsCertificateKeyFile x509-full.pem  --authenticationMechanism MONGODB-X509 --authenticationDatabase '$external'
 
+--external service using nodePort
+mongo --host shardedcluster-home-mongos-0 --port 31649 --tls --tlsCAFile ca.crt --tlsCertificateKeyFile x509-full.pem  --authenticationMechanism MONGODB-X509 --authenticationDatabase '$external'
+
 
 #inside pod
 cd ~

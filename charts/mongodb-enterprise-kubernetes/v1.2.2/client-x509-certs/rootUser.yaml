@@ -6,7 +6,7 @@ metadata:
 spec:
   username: "CN=my-x509-authenticated-user,OU=organizationalunit,O=organization"
   db: "$external"
-  project: mongodb-enterprise-operator-project
+  project: shardedcluster-home-project
   roles:
     - db: "admin"
       name: "root"
